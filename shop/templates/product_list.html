@@ -1,0 +1,39 @@
+{% load static %}
+{% extends 'base.html' %}
+{% block title %}Our Products | Liquor Store{% endblock %}
+
+{% block content %}
+<section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-10 text-center heading-section ftco-animate">
+        <h2 class="mb-4">Explore Our Collection</h2>
+        <p>Choose from our premium selection of wines, beers, spirits, and more.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      {% for product in products %}
+      <div class="col-md-4 d-flex">
+        <div class="product ftco-animate">
+          <a href="{% url 'product_detail' product.slug %}" class="img-prod">
+            <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+          </a>
+          <div class="text py-3 px-3">
+            <h3><a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a></h3>
+            <div class="pricing">
+              <p class="price"><span>Rs. {{ product.price }}</span></p>
+            </div>
+            <p><a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a></p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-md-12 text-center">
+        <p>No products found.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

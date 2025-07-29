@@ -1,16 +1,16 @@
-from django.contrib import admin
-from django.urls import path
-from shop import views  # import your app views
+# liquorstore_project/urls.py
 
+from django.contrib import admin
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),          # ✅ This is the fix
-    path('home/', views.home, name='home'),
+    path('', include('shop.urls')),  # Root route includes shop app URLs
 ]
 
-# Static and media
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+# Media & static handling in development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

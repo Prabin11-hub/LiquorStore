@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="ftco-section">
+  <div class="container">
+    <h2 class="mb-4">Checkout</h2>
+    <form method="post" action="{% url 'place_order' %}">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Billing Details</h4>
+          <div class="form-group">
+            <label for="full_name">Full Name</label>
+            <input type="text" class="form-control" name="full_name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Shipping Address</label>
+            <textarea name="address" class="form-control" rows="3" required></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h4>Your Order Summary</h4>
+          <ul class="list-group mb-3">
+            {% for item in cart.items.all %}
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">{{ item.product.name }} (x{{ item.quantity }})</h6>
+              </div>
+              <span class="text-muted">${{ item.product.price|multiply:item.quantity }}</span>
+            </li>
+            {% endfor %}
+            <li class="list-group-item d-flex justify-content-between">
+              <strong>Total</strong>
+              <strong>${{ cart.get_total_price }}</strong>
+            </li>
+          </ul>
+          <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

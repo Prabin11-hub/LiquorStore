@@ -1,13 +1,55 @@
-<!-- templates/home.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Liquor Store - Home</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <h1>Welcome to the Liquor Store 🥂</h1>
-    <p>Explore our wide range of products.</p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Liquor Store{% endblock %}
+
+{% block content %}
+
+  <!-- Header -->
+  {% include 'partials/header.html' %}
+
+  <!-- Hero Banner Section -->
+  {% include 'partials/hero.html' %}
+
+  <!-- Categories Section (optional sample block) -->
+  <section class="ftco-section ftco-category ftco-no-pt">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+          <span class="subheading">Categories</span>
+          <h2 class="mb-4">Browse by Category</h2>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="category-wrap">
+            <a href="#" class="img" style="background-image: url('{% static "images/beer.jpg" %}');"></a>
+            <div class="text px-3 py-1">
+              <h2><a href="#">Beer</a></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="category-wrap">
+            <a href="#" class="img" style="background-image: url('{% static "images/wine.jpg" %}');"></a>
+            <div class="text px-3 py-1">
+              <h2><a href="#">Wine</a></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="category-wrap">
+            <a href="#" class="img" style="background-image: url('{% static "images/whiskey.jpg" %}');"></a>
+            <div class="text px-3 py-1">
+              <h2><a href="#">Whiskey</a></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- More sections like Featured Products, Testimonials, etc., can be included here -->
+
+  <!-- Footer -->
+  {% include 'partials/footer.html' %}
+
+{% endblock %}

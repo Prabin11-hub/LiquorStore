@@ -2,11 +2,6 @@ from django.contrib import admin
 from .models import Category, Product, CartItem, Cart, Order, Profile
 
 
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'phone']
-
-
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
@@ -33,6 +28,11 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'full_name', 'paid', 'status', 'ordered_at']
-    list_filter = ['paid', 'status']
+    list_display = ['id', 'user', 'status', 'ordered_at']
+    list_filter = ['status']
     search_fields = ['full_name', 'email', 'phone']
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'phone', 'is_vendor']
